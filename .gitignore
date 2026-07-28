@@ -1,0 +1,10 @@
+# LaTeX 编译临时文件
+*.aux
+*.log
+*.nav
+*.out
+*.snm
+*.toc
+
+# JetBrains IDE (CLion / IDEA) 缓存
+.idea/
