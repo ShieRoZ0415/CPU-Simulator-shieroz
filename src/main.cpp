@@ -13,6 +13,6 @@ int main() {
         if (state == StepResult::InvalidInstruction) return 1;
 
     }
-    std::cout << cpu.register_value(10U) & 0xFFU << std::endl;
+    std::cout << (cpu.register_value(10U) & 0xFFU) << std::endl;
     return 0;
 }
