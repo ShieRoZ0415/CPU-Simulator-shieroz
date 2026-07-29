@@ -10,7 +10,6 @@ add_executable(riscv_sim
         src/main.cpp
         src/memory.cpp
         src/decoder.cpp
-        tests/cpu_test.cpp
         src/cpu.cpp
         src/pipeline_cpu.h
         src/loader.cpp

@@ -81,7 +81,7 @@ PipelineStepResult PipelineCpu::step_cycle() {
         break;
     case Operation::JALR:
         registers_.write(instruction.rd, pc_ + 4U);
-        pc_next = pc_ + (rs1_value + immediate) & ~1U;
+        pc_next = (rs1_value + immediate) & ~1U;
         break;
     case Operation::BEQ:
         if (rs1_value == rs2_value) pc_next = pc_ + immediate;
@@ -177,7 +177,7 @@ PipelineStepResult PipelineCpu::step_cycle() {
         registers_.write(instruction.rd, rs1_value | rs2_value);
         break;
     case Operation::XOR:
-        registers_.write(instruction.rd, rs1_value ^ immediate);
+        registers_.write(instruction.rd, rs1_value ^ rs2_value);
         break;
     case Operation::ADDI:
         registers_.write(instruction.rd, rs1_value + immediate);

@@ -15,6 +15,7 @@ uint32_t hex_value(char c) {
     if (c >= '0' && c <= '9') return static_cast<uint32_t>(c - '0');
     if (c >= 'a' && c <= 'f') return static_cast<uint32_t>(c - 'a' + 10);
     if (c >= 'A' && c <= 'F') return static_cast<uint32_t>(c - 'A' + 10);
+    return 0U;
 }
 
 bool hex_to_32(const std::string& text, uint32_t& value) {
