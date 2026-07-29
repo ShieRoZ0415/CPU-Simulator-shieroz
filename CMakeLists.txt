@@ -10,6 +10,12 @@ add_executable(riscv_sim
         src/main.cpp
         src/memory.cpp
         src/decoder.cpp
+        tests/cpu_test.cpp
+        src/cpu.cpp
+        src/pipeline_cpu.h
+        src/loader.cpp
+        src/loader.h
+        src/pipeline_cpu.cpp
 )
 
 target_include_directories(riscv_sim PRIVATE
@@ -33,4 +39,15 @@ add_executable(decoder_test
 
 target_include_directories(decoder_test PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/src
+)
+
+add_executable(cpu_test
+        tests/cpu_test.cpp
+        src/cpu.cpp
+        src/decoder.cpp
+        src/memory.cpp
+        src/cpu.h
+        src/register_file.h
+        src/pipeline_cpu.h
+        src/pipeline_cpu.cpp
 )
