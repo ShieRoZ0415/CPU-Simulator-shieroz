@@ -50,3 +50,23 @@ add_executable(cpu_test
         src/pipeline_cpu.h
         src/pipeline_cpu.cpp
 )
+target_include_directories(cpu_test PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/src
+)
+
+add_executable(pipeline_cpu_test
+        src/pipeline_cpu_test.cpp
+        src/pipeline_cpu.cpp
+        src/decoder.cpp
+        src/memory.cpp
+)
+target_include_directories(pipeline_cpu_test PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/src
+)
+
+enable_testing()
+
+add_test(NAME memory_test COMMAND memory_test)
+add_test(NAME decoder_test COMMAND decoder_test)
+add_test(NAME cpu_test COMMAND cpu_test)
+add_test(NAME pipeline_cpu_test COMMAND pipeline_cpu_test)

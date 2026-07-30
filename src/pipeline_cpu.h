@@ -25,13 +25,15 @@ public:
 
 private:
     static constexpr uint32_t HaltInstruction = 0x0FF00513U;
+    static constexpr uint8_t MemoryCycles = 3U;
+
     static int64_t signed_value(uint32_t value) noexcept;
     static uint32_t sign_extend_to_u32(uint32_t value, unsigned int bit_count) noexcept;
     static uint32_t arithmetic_shift_right(uint32_t value, uint32_t shift_amount) noexcept;
     Memory& memory_;
     RegisterFile registers_{};
     uint32_t pc_{0};
-    uint64_t cycle_count_{0};
+    uint64_t cycle_count_{0}; // 已运行周期数
     bool fetch_stopped_{false};
 
     struct IfIdRegister {
@@ -53,6 +55,7 @@ private:
         DecodedInstruction instruction{};
         uint32_t result{0};
         uint32_t store_data{0};
+        uint8_t mem_cycles{0}; // 访存还需要占用多少个 MEM cycle
     };
 
     struct MemWbRegister {
@@ -67,8 +70,9 @@ private:
     MemWbRegister mem_wb_{};
 
     static bool is_load(Operation op) noexcept;
+    static bool is_memory(Operation op) noexcept;
     static bool write_register(const DecodedInstruction& instruction) noexcept;
-    uint32_t forwarded_rs1(const IdExRegister& source) const noexcept;
-    uint32_t forwarded_rs2(const IdExRegister& source) const noexcept;
-    bool load_use_hazard(const DecodedInstruction& instruction) const noexcept;
+    uint32_t forwarded_rs1(const IdExRegister& current) const noexcept;
+    uint32_t forwarded_rs2(const IdExRegister& current) const noexcept;
+    bool needs_stall(const DecodedInstruction& instruction) const noexcept;
 };
