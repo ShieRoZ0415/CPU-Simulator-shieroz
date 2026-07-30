@@ -15,6 +15,9 @@ add_executable(code
         src/loader.cpp
         src/loader.h
         src/pipeline_cpu.cpp
+        src/tomasulo_type.h
+        src/tomasulo_cpu.cpp
+        src/tomasulo_cpu.h
 )
 
 target_include_directories(code PRIVATE
@@ -55,7 +58,7 @@ target_include_directories(cpu_test PRIVATE
 )
 
 add_executable(pipeline_cpu_test
-        src/pipeline_cpu_test.cpp
+        tests/pipeline_cpu_test.cpp
         src/pipeline_cpu.cpp
         src/decoder.cpp
         src/memory.cpp
