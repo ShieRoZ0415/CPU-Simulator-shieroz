@@ -15,7 +15,6 @@ add_executable(code
         src/loader.cpp
         src/loader.h
         src/pipeline_cpu.cpp
-        src/tomasulo_type.h
         src/tomasulo_cpu.cpp
         src/tomasulo_cpu.h
 )
@@ -67,9 +66,22 @@ target_include_directories(pipeline_cpu_test PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/src
 )
 
+add_executable(tomasulo_cpu_test
+        tests/tomasulo_cpu_test.cpp
+        src/tomasulo_cpu.cpp
+        src/decoder.cpp
+        src/memory.cpp
+        src/loader.cpp
+)
+target_include_directories(tomasulo_cpu_test PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/src
+)
+
 enable_testing()
 
 add_test(NAME memory_test COMMAND memory_test)
 add_test(NAME decoder_test COMMAND decoder_test)
 add_test(NAME cpu_test COMMAND cpu_test)
 add_test(NAME pipeline_cpu_test COMMAND pipeline_cpu_test)
+add_test(NAME tomasulo_cpu_test COMMAND tomasulo_cpu_test
+        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
